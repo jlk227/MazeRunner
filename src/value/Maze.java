@@ -92,9 +92,9 @@ public class Maze {
 		for (int i = 0; i< ROW_SIZE; i++){
 			for (int j = 0; j< COL_SIZE; j++){
 				if (BlockType.Wall == blocks[i][j].getType()){
-					System.out.print("W");
+					System.out.print("#");
 				}else {
-					System.out.print("R");
+					System.out.print(" ");
 				}
 			}
 			System.out.println();

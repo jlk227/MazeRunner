@@ -27,7 +27,7 @@ public class Game {
 		maze = new Maze(mazeRowSize, mazeColSize);
 		runner = new Runner(name, maze.entrance, mazeRowSize, mazeColSize);
 		
-		System.out.println("Maze - W: wall, R: room ");
+		System.out.println("Maze - #: wall, space: room ");
 
 		System.out.println(runner.name + " starts at (" + (runner.i + 1) + " , " + (runner.j + 1)+")");
 		

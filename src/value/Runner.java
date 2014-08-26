@@ -42,7 +42,7 @@ public class Runner {
 	
 	public void printPath(){
 		int itemPerLine = 3;
-		System.out.println("Path: ");
+		System.out.println(name + "'s running path: ");
 		for (Block block: path){
 			System.out.print(" (" + ( block.getI() + 1 ) + " , " + ( block.getJ() + 1 ) + ") ");
 			itemPerLine++;
@@ -65,14 +65,14 @@ public class Runner {
 			j = current.getJ();
 			addBlockToPath(current);
 			if (maze.isOnEdge(i, j)){
-				System.out.println("Runner - " + name + " got out, nice!");
+				System.out.println(name + " got out, nice!");
 				printPath();
 				return true;
 			}
 			addBlocksToRoute(maze.getNeighbourRooms(i, j));
 		}
 		
-		System.out.println("Runner - " + name + " didn't make it, sorry.");
+		System.out.println(name + " didn't make it, sorry.");
 		printPath();
 		return false;
 		

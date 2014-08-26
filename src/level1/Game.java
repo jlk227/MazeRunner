@@ -28,10 +28,10 @@ public class Game {
 		runner = new Runner(name, maze.entrance, mazeRowSize, mazeColSize);
 		
 		System.out.println("Maze - W: wall, R: room ");
+
+		System.out.println(runner.name + " starts at (" + (runner.i + 1) + " , " + (runner.j + 1)+")");
 		
 		maze.print();
-		
-		System.out.println("Runner starts at (" + (runner.i + 1) + " , " + (runner.j + 1)+")");
 	}
 	
 	/**

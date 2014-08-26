@@ -1,16 +1,20 @@
 package level1;
 
-
-import value.Block;
 import value.Maze;
 import value.Runner;
 
 /**
- * Level I game
+ * Level I game, 
+ * Set up MAZE_ROW_SIZE, MAZE_COL_SIZE, and runner name
+ * Program randomly generates maze and place runner at the entrance 
+ * Program runs the runner.
  * @author jenniferlikess
  *
  */
 public class Game {
+	static int MAZE_ROW_SIZE = 8;
+	static int MAZE_COL_SIZE = 8;
+	static String name = "Jennie Li";
 	Maze maze;
 	Runner runner;
 	
@@ -18,12 +22,10 @@ public class Game {
 	 * Game constructor
 	 * @param mazeRowSize
 	 * @param mazeColSize
-	 * @param startI
-	 * @param startJ
 	 */
 	public Game(int mazeRowSize, int mazeColSize){
 		maze = new Maze(mazeRowSize, mazeColSize);
-		runner = new Runner(1, maze.entrance, mazeRowSize, mazeColSize);
+		runner = new Runner(name, maze.entrance, mazeRowSize, mazeColSize);
 		
 		System.out.println("Maze - W: wall, R: room ");
 		
@@ -42,34 +44,16 @@ public class Game {
 			return;
 		}
 		
-		runner.addBlocksToRoute(maze.getNeighbourRooms(runner.i, runner.j));
-		
-		Block current= null;
-		int i, j;
-		
-		while(!runner.route.isEmpty()){
-			current = runner.route.pop();
-			i = current.getI();
-			j = current.getJ();
-			runner.addBlockToPath(current);
-			if (maze.isOnEdge(i, j)){
-				System.out.println("You got out, nice!");
-				runner.printPath();
-				return;
-			}
-			runner.addBlocksToRoute(maze.getNeighbourRooms(i, j));
-		}
-		
-		System.out.println("You didn't make it, sorry.");
-		runner.printPath();
-		
+		runner.runs(maze);
 	}
 	
+	/**
+	 * Main
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		
-		Game game = new Game(8, 8);
+		Game game = new Game(MAZE_ROW_SIZE, MAZE_COL_SIZE);
 		game.start();
-		
 	}
 
 }

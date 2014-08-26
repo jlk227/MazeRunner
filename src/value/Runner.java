@@ -6,15 +6,16 @@ import java.util.Stack;
 
 public class Runner {
 	
-	public int i, j, id;
+	public int i, j;
+	public String name;
 	public boolean[][] seen;
 	public Stack<Block> route;
 	public List<Block> path;
 	
-	public Runner(int id, Block start, int maze_row_size, int maze_col_size){
+	public Runner(String name, Block start, int maze_row_size, int maze_col_size){
 		i = start.getI();
 		j = start.getJ();
-		this.id = id;
+		this.name = name;
 		
 		seen = new boolean[maze_row_size][maze_col_size];
 		seen[i][j] = true;
@@ -49,5 +50,31 @@ public class Runner {
 				System.out.println();
 			}
 		}
+	}
+	
+	public boolean runs(Maze maze){
+
+		addBlocksToRoute(maze.getNeighbourRooms(i, j));
+		
+		Block current= null;
+		int i, j;
+		
+		while(!route.isEmpty()){
+			current = route.pop();
+			i = current.getI();
+			j = current.getJ();
+			addBlockToPath(current);
+			if (maze.isOnEdge(i, j)){
+				System.out.println("Runner - " + name + " got out, nice!");
+				printPath();
+				return true;
+			}
+			addBlocksToRoute(maze.getNeighbourRooms(i, j));
+		}
+		
+		System.out.println("Runner - " + name + " didn't make it, sorry.");
+		printPath();
+		return false;
+		
 	}
 }

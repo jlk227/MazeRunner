@@ -16,9 +16,8 @@ public class Maze {
 	
 	private final int ROW_SIZE;
 	private final int COL_SIZE;
-	private final int[][] neighbors = new int[][]{{-1, -1}, {1, -1} , {1, 1}, {-1, 1}, {0, -1}, {-1, 0}, {1, 0}, {0, 1}};
+	private final int[][] neighbors = new int[][]{{0, -1}, {-1, 0}, {1, 0}, {0, 1}};
 	private static final Random rand = new Random();
-	
 
 	/** member getter method **/
 	public int getRowSize() {
@@ -127,15 +126,18 @@ public class Maze {
 		blocks = new Block[ROW_SIZE][COL_SIZE];
 		int randomI = rand.nextInt(COL_SIZE-1);
 		int randomII = rand.nextInt(ROW_SIZE-1);
-		blocks[randomI][0] = new Block(randomI, 0, BlockType.Room);
-		blocks[randomII][COL_SIZE-1] = new Block(randomII, 0, BlockType.Room);
+		blocks[randomI][0] = new Block(randomI, 0, BlockType.Room); // set up a room on the left edge
+		blocks[randomII][COL_SIZE-1] = new Block(randomII, 0, BlockType.Room);// set up a room on the right edge
 		entrance = blocks[randomI][0];
 	
 		for (int i = 0; i<ROW_SIZE; i++){
 			for (int j = 0; j<COL_SIZE; j++){
 				if(blocks[i][j] == null){
-					if(isOnEdge(i, j)) {blocks[i][j] = new Block(i, j, BlockType.Wall);}
-					else {blocks[i][j] = new Block(i, j, BlockType.random());}
+					if(isOnEdge(i, j)) {
+						blocks[i][j] = new Block(i, j, BlockType.Wall);
+					}else {
+						blocks[i][j] = new Block(i, j, BlockType.random());
+					}
 				}
 			}
 		}
